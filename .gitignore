@@ -1,0 +1,37 @@
+# Segredos — NUNCA commitar (repositório público)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.jks
+*.keystore
+secrets/
+credentials*.json
+service-account*.json
+
+# Dados reais de clientes e conversas
+data/real/
+*.dump
+*.sql.gz
+
+# Dependências e build
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+dist/
+build/
+coverage/
+
+# Editor e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

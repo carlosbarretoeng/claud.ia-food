@@ -23,6 +23,10 @@ Sistema de atendimento e gestão para lanchonetes e hamburguerias pequenas, com 
 - **Milestones:** `Fase 0 — Preparação`, `MVP`, `v2`, `v3`.
 - **Commits e PRs:** citar o ID do requisito (ex.: `ATD-04: interpretar pedido em linguagem natural`) e fechar o issue com `Closes #N`.
 
+## Segurança
+
+Repositório público: **nenhuma chave, token, credencial ou senha** pode ser armazenada ou commitada. Veja [SECURITY.md](SECURITY.md).
+
 ## Premissas principais
 
 - Uma loja, até ~500 pedidos/mês, maioria delivery.
