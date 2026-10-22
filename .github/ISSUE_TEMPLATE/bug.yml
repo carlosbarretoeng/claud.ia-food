@@ -1,0 +1,26 @@
+name: Bug
+description: Algo não funciona como esperado
+labels: ["bug"]
+body:
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que era esperado
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: "1. ...\n2. ..."
+  - type: input
+    id: requisito
+    attributes:
+      label: Requisito relacionado (se houver)
+      placeholder: ATD-04

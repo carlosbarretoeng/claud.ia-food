@@ -1,0 +1,31 @@
+name: Requisito
+description: Um requisito do documento de requisitos (ATD, PED, CLI, GER, FIN, REL, RNF)
+title: "XXX-00: "
+labels: ["requisito"]
+body:
+  - type: input
+    id: id
+    attributes:
+      label: ID do requisito
+      placeholder: ATD-04
+    validations:
+      required: true
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Requisito
+    validations:
+      required: true
+  - type: textarea
+    id: aceite
+    attributes:
+      label: Critério de aceite
+    validations:
+      required: true
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: Prioridade
+      options: [MVP, v2, v3]
+    validations:
+      required: true
