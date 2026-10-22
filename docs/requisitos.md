@@ -387,8 +387,8 @@ O MVP põe a IA para atender e vender pelo WhatsApp com o gerente aprovando os p
 
 | Fase | Escopo | Critério de saída | Estimativa (1 dev full-stack) |
 | --- | --- | --- | --- |
-| 0 — Preparação | Conta Meta Business verificada, número oficial, provedor PIX, cardápio e fichas técnicas cadastrados, 100 conversas reais coletadas para teste | Ambiente de testes enviando e recebendo mensagens | 2–3 semanas |
-| 1 — MVP | Todos os requisitos marcados MVP: atendimento IA + humano com aprovação, fila de pedidos, impressão, PIX, entregador por WhatsApp, ficha do cliente e pedido habitual, entrada de estoque por foto/áudio, faltas e lista de compras, caixa, resumo diário, relatórios básicos | 2 semanas em produção com ≥ 80% dos pedidos fechados pela IA sem correção e zero pedido perdido | 10–14 semanas |
+| 0 — Preparação | Simulador de WhatsApp (ADR-0004), provedor PIX, cardápio e fichas técnicas cadastrados, 100 conversas reais coletadas para teste, arquitetura técnica | Simulador enviando e recebendo mensagens no formato da Cloud API | 2–3 semanas |
+| 1 — MVP | Todos os requisitos marcados MVP, desenvolvidos sobre o simulador; antes do lançamento, conta Meta Business, número oficial e verificação da empresa (F0-01): atendimento IA + humano com aprovação, fila de pedidos, impressão, PIX, entregador por WhatsApp, ficha do cliente e pedido habitual, entrada de estoque por foto/áudio, faltas e lista de compras, caixa, resumo diário, relatórios básicos | 2 semanas em produção com ≥ 80% dos pedidos fechados pela IA sem correção e zero pedido perdido | 10–14 semanas |
 | 2 — v2 | Mesas e comandas, KDS, sugestões direcionadas, fidelidade, cupons, campanhas e reativação, NF-e por chave, inventário guiado, previsão e envio de compras ao fornecedor com aprovação, NFC-e, cartão online, CMV e margem | Modo aprovação desligado; ticket médio e recompra medidos | 10–12 semanas |
 | 3 — v3 | Compra automática com limites, validade por lote, estações de cozinha, maquininha integrada, DRE, leitura de imagens do cliente | Definição após 3 meses de v2 | A definir |
 
