@@ -1,7 +1,7 @@
 # ADR-0005 — Stack: TypeScript, Supabase e Claude API
 
 - **Data:** 22/10/2026
-- **Status:** proposta (aguardando aprovação no PR)
+- **Status:** aceita (PR #126)
 - **Detalhes:** [arquitetura técnica](../arquitetura-tecnica.md)
 
 ## Contexto
