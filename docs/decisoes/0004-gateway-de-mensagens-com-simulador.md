@@ -12,10 +12,10 @@ Ativar a WhatsApp Cloud API em produção exige conta Meta Business, um número 
 
 Todo envio e recebimento de mensagens passa por uma interface única, o **gateway de mensagens**, com duas implementações trocáveis por configuração:
 
-| Implementação | Uso | Comportamento |
-| --- | --- | --- |
-| `simulador` | Desenvolvimento, testes automáticos, demonstrações | Tela web semelhante ao WhatsApp onde se conversa como cliente, gerente ou fornecedor. Gera webhooks no **mesmo formato da Cloud API** e recebe as respostas do sistema. |
-| `cloud_api` | Homologação e produção | Integração real com a Meta. |
+| Implementação | Uso                                                | Comportamento                                                                                                                                                           |
+| ------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `simulador`   | Desenvolvimento, testes automáticos, demonstrações | Tela web semelhante ao WhatsApp onde se conversa como cliente, gerente ou fornecedor. Gera webhooks no **mesmo formato da Cloud API** e recebe as respostas do sistema. |
+| `cloud_api`   | Homologação e produção                             | Integração real com a Meta.                                                                                                                                             |
 
 Regras para o simulador ser fiel:
 

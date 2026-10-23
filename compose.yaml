@@ -1,0 +1,81 @@
+# Ambiente de desenvolvimento isolado em Docker.
+#   docker compose up                                  # instala dependências e sobe banco, API, painel e simulador
+#   docker compose run --rm ferramentas pnpm test      # testes
+# Portas publicadas só em 127.0.0.1. O banco local não usa senha (trust), apenas para desenvolvimento.
+
+x-node: &node
+  build:
+    context: .
+    dockerfile: docker/dev.Dockerfile
+  image: claudia-food-dev
+  working_dir: /app
+  volumes:
+    - .:/app
+    - pnpm-store:/pnpm-store
+  env_file:
+    - path: .env
+      required: false
+  environment:
+    DATABASE_URL: postgres://postgres@db:5432/claudia
+
+services:
+  # Roda antes dos apps a cada "up": instala/atualiza dependências conforme o lockfile.
+  instalar:
+    <<: *node
+    command: pnpm install --frozen-lockfile
+
+  db:
+    image: postgres:17.11
+    environment:
+      POSTGRES_DB: claudia
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - db-dados:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 10
+
+  api:
+    <<: *node
+    command: pnpm --filter @claudia-food/api dev
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      instalar:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+
+  painel:
+    <<: *node
+    command: pnpm --filter @claudia-food/painel dev --host 0.0.0.0
+    ports:
+      - "127.0.0.1:5173:5173"
+    depends_on:
+      instalar:
+        condition: service_completed_successfully
+
+  simulador:
+    <<: *node
+    command: pnpm --filter @claudia-food/simulador dev --host 0.0.0.0
+    environment:
+      API_URL: http://api:3000
+    ports:
+      - "127.0.0.1:5174:5174"
+    depends_on:
+      instalar:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+
+  ferramentas:
+    <<: *node
+    profiles: ["ferramentas"]
+    command: pnpm test
+
+volumes:
+  db-dados:
+  pnpm-store:

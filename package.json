@@ -1,0 +1,31 @@
+{
+  "name": "claud.ia-food",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "dev:api": "pnpm --filter @claudia-food/api dev",
+    "dev:painel": "pnpm --filter @claudia-food/painel dev",
+    "dev:simulador": "pnpm --filter @claudia-food/simulador dev",
+    "format:check": "prettier --check ."
+  },
+  "packageManager": "pnpm@12.15.0",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^5.0.5"
+  }
+}

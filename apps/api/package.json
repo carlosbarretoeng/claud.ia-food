@@ -1,0 +1,17 @@
+{
+  "name": "@claudia-food/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=../../.env src/index.ts",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@claudia-food/dominio": "workspace:*",
+    "@claudia-food/mensageria": "workspace:*",
+    "fastify": "^5.12.7"
+  }
+}

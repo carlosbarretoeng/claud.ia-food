@@ -1,0 +1,11 @@
+{
+  "name": "@claudia-food/agente-impressao",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --env-file-if-exists=../../.env src/index.ts",
+    "build": "tsup src/index.ts --format esm --target node24 --clean",
+    "typecheck": "tsc --noEmit"
+  }
+}

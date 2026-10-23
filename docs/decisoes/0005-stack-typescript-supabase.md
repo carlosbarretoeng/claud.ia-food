@@ -11,7 +11,7 @@ Projeto de um desenvolvedor, uma loja, ~500 pedidos/mês, com painel em tempo re
 ## Decisão
 
 - **TypeScript** em todo o sistema, em monorepo com pnpm workspaces.
-- **API:** Node.js 22 LTS + Fastify + Zod; jobs com pg-boss no próprio Postgres.
+- **API:** Node.js 24 LTS + Fastify + Zod; jobs com pg-boss no próprio Postgres.
 - **Dados e plataforma:** Supabase (PostgreSQL, Auth, Realtime, Storage), região São Paulo; Drizzle ORM para esquema e migrações.
 - **Painel e simulador:** React + Vite (PWA).
 - **IA:** Claude API com tool use; modelo `claude-opus-5-5` (esforço `low` no atendimento, `medium` no gerente virtual), prompt caching e fallback do servidor em caso de recusa.

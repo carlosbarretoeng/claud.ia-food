@@ -10,12 +10,34 @@ Sistema de atendimento e gestão para lanchonetes e hamburguerias pequenas, com 
 
 ## Documentação
 
-| Documento | Conteúdo |
-| --- | --- |
-| [Estudo de mercado](docs/estudo-de-mercado.md) | Ferramentas existentes, preços, matriz de pontuação e por que desenvolver |
-| [Requisitos](docs/requisitos.md) | Cerca de 110 requisitos numerados (ATD, PED, CLI, GER, FIN, REL, RNF) com prioridade e critério de aceite |
-| [Decisões de arquitetura](docs/decisoes/) | Registros de decisão (ADR) |
-| [Wiki](../../wiki) | Visão geral, roadmap, glossário e como trabalhar no projeto |
+| Documento                                      | Conteúdo                                                                                                  |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [Estudo de mercado](docs/estudo-de-mercado.md) | Ferramentas existentes, preços, matriz de pontuação e por que desenvolver                                 |
+| [Requisitos](docs/requisitos.md)               | Cerca de 110 requisitos numerados (ATD, PED, CLI, GER, FIN, REL, RNF) com prioridade e critério de aceite |
+| [Decisões de arquitetura](docs/decisoes/)      | Registros de decisão (ADR)                                                                                |
+| [Wiki](../../wiki)                             | Visão geral, roadmap, glossário e como trabalhar no projeto                                               |
+
+## Ambiente de desenvolvimento (Docker)
+
+Tudo roda em containers; no computador só é preciso o Docker. Node 24, pnpm e Postgres 17 ficam dentro do ambiente.
+
+No Windows, clone o repositório **dentro do WSL2** (ex.: `~/projetos/claud.ia-food` no Ubuntu), com a integração WSL do Docker Desktop ativada, e abra a pasta pelo VS Code com a extensão WSL. Numa pasta do Windows o recarregamento automático não funciona e tudo fica mais lento.
+
+```bash
+cp .env.example .env                             # valores locais; nunca commitar o .env
+docker compose up                                # instala dependências e sobe banco, API, painel e simulador
+```
+
+| Serviço               | Endereço                             |
+| --------------------- | ------------------------------------ |
+| API                   | http://localhost:3000/saude          |
+| Painel                | http://localhost:5173                |
+| Simulador de WhatsApp | http://localhost:5174                |
+| Postgres              | localhost:5432 (sem senha, só local) |
+
+Comandos úteis: `docker compose run --rm ferramentas pnpm test` · `... pnpm lint` · `... pnpm typecheck` · `... pnpm build` · `docker compose down` (para tudo).
+
+Estrutura: `apps/` (api, painel, simulador, agente-impressao) e `packages/` (dominio, mensageria, ia, db) — ver [arquitetura técnica](docs/arquitetura-tecnica.md#3-estrutura-do-repositório).
 
 ## Gestão do projeto
 
