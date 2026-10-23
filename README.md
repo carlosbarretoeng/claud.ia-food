@@ -19,7 +19,7 @@ Sistema de atendimento e gestão para lanchonetes e hamburguerias pequenas, com 
 
 ## Ambiente de desenvolvimento (Docker)
 
-Tudo roda em containers; no computador só é preciso o Docker. Node 24, pnpm e Postgres 17 ficam dentro do ambiente.
+Tudo roda em containers; no computador só é preciso o Docker. Node 24 e pnpm ficam dentro do ambiente. O banco é o Supabase do homelab (mais próximo da produção); um Postgres local sem senha está disponível com `--profile banco-local`.
 
 No Windows, clone o repositório **dentro do WSL2** (ex.: `~/projetos/claud.ia-food` no Ubuntu), com a integração WSL do Docker Desktop ativada, e abra a pasta pelo VS Code com a extensão WSL. Numa pasta do Windows o recarregamento automático não funciona e tudo fica mais lento.
 

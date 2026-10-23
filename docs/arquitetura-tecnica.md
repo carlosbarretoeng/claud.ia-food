@@ -177,11 +177,11 @@ Preços de Supabase, hospedagem e transcrição são aproximados e devem ser con
 
 ## 8. Ambientes
 
-| Ambiente    | Mensageria                          | Banco                                                                        | Uso                                                  |
-| ----------- | ----------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------- |
-| Local       | Simulador                           | Postgres 17 no Docker Compose (Supabase local quando Auth/Realtime entrarem) | Desenvolvimento, tudo em containers (`compose.yaml`) |
-| Homologação | Simulador e número de teste da Meta | Projeto Supabase grátis                                                      | Testes ponta a ponta, demonstrações                  |
-| Produção    | Cloud API (número oficial)          | Projeto Supabase pago, região São Paulo                                      | Loja                                                 |
+| Ambiente    | Mensageria                          | Banco                                                                                                                                  | Uso                                                  |
+| ----------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Local       | Simulador                           | Supabase do homelab (Postgres 17, Auth, Realtime, Storage), acessado pela Tailscale; Postgres local opcional (`--profile banco-local`) | Desenvolvimento, apps em containers (`compose.yaml`) |
+| Homologação | Simulador e número de teste da Meta | Supabase do homelab                                                                                                                    | Testes ponta a ponta, demonstrações                  |
+| Produção    | Cloud API (número oficial)          | Projeto Supabase pago, região São Paulo                                                                                                | Loja                                                 |
 
 ## 9. Segurança e segredos
 

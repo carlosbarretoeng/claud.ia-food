@@ -1,7 +1,9 @@
 # Ambiente de desenvolvimento isolado em Docker.
 #   docker compose up                                  # instala dependências e sobe banco, API, painel e simulador
 #   docker compose run --rm ferramentas pnpm test      # testes
-# Portas publicadas só em 127.0.0.1. O banco local não usa senha (trust), apenas para desenvolvimento.
+# Banco: por padrão o Supabase do homelab (DATABASE_URL no .env, ver .env.example).
+# Para usar um Postgres local sem senha: docker compose --profile banco-local up
+# Portas publicadas só em 127.0.0.1.
 
 x-node: &node
   build:
@@ -15,8 +17,6 @@ x-node: &node
   env_file:
     - path: .env
       required: false
-  environment:
-    DATABASE_URL: postgres://postgres@db:5432/claudia
 
 services:
   # Roda antes dos apps a cada "up": instala/atualiza dependências conforme o lockfile.
@@ -25,6 +25,7 @@ services:
     command: pnpm install --frozen-lockfile
 
   db:
+    profiles: ["banco-local"]
     image: postgres:17.11
     environment:
       POSTGRES_DB: claudia
@@ -48,6 +49,7 @@ services:
         condition: service_completed_successfully
       db:
         condition: service_healthy
+        required: false
 
   painel:
     <<: *node
