@@ -1,4 +1,5 @@
 // Ciclo de vida do pedido (docs/requisitos.md, seção 4 — Módulo 2).
+import { pagamentoLiberaPreparo, type StatusPagamento } from "./pagamento.js";
 
 export const STATUS_PEDIDO = [
   "rascunho",
@@ -50,7 +51,7 @@ export type ResultadoTransicao = { ok: true } | { ok: false; motivo: string };
 export function podeTransicionar(
   de: StatusPedido,
   para: StatusPedido,
-  contexto: { tipo: TipoPedido; perfil: PerfilUsuario },
+  contexto: { tipo: TipoPedido; perfil: PerfilUsuario; pagamento: StatusPagamento },
 ): ResultadoTransicao {
   if (!TRANSICOES[de].includes(para)) {
     return { ok: false, motivo: `Transição inválida: ${de} → ${para}` };
@@ -65,6 +66,12 @@ export function podeTransicionar(
     contexto.perfil !== "gerente"
   ) {
     return { ok: false, motivo: "Cancelamento após o início do preparo exige gerente" };
+  }
+  if (para === "em_preparo" && !pagamentoLiberaPreparo(contexto.pagamento)) {
+    return {
+      ok: false,
+      motivo: "Pagamento pendente: o pedido só vai para a cozinha depois do PIX pago",
+    };
   }
   return { ok: true };
 }

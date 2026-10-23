@@ -31,7 +31,11 @@ export interface MensagemEnviada {
 
 export type ResultadoEnvio =
   | { ok: true; id: string }
-  | { ok: false; erro: "fora_da_janela_24h" | "falha_envio"; detalhe?: string };
+  | {
+      ok: false;
+      erro: "fora_da_janela_24h" | "mensagem_invalida" | "falha_envio";
+      detalhe?: string;
+    };
 
 export interface GatewayMensagens {
   enviar(mensagem: MensagemEnviada): Promise<ResultadoEnvio>;

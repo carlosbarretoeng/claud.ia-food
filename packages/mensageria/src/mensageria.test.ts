@@ -98,3 +98,56 @@ describe("GatewaySimulador", () => {
     expect(gw.enviosDoPedido("p1")).toBe(2);
   });
 });
+
+describe("validarMensagem / limites da Meta", () => {
+  const contato = "5565999990000";
+  const botao = (id: string, titulo: string) => ({ id, titulo });
+
+  it("recusa mais de 3 botões e título acima de 20 caracteres", async () => {
+    const gw = new GatewaySimulador();
+    gw.registrarRecebida({
+      id: "w",
+      de: contato,
+      em: new Date(),
+      conteudo: { tipo: "texto", texto: "oi" },
+    });
+    const r = await gw.enviar({
+      para: contato,
+      conteudo: {
+        tipo: "botoes",
+        texto: "Confirma o pedido?",
+        botoes: [
+          botao("a", "Confirmar"),
+          botao("b", "Mudar"),
+          botao("c", "Cancelar"),
+          botao("d", "Um título longo demais aqui"),
+        ],
+      },
+    });
+    expect(r.ok).toBe(false);
+    if (!r.ok) {
+      expect(r.erro).toBe("mensagem_invalida");
+      expect(r.detalhe).toContain("4 botões");
+      expect(r.detalhe).toContain("passa de 20");
+    }
+  });
+
+  it("aceita a mensagem de confirmação do fluxo enxuto", async () => {
+    const gw = new GatewaySimulador();
+    gw.registrarRecebida({
+      id: "w",
+      de: contato,
+      em: new Date(),
+      conteudo: { tipo: "texto", texto: "oi" },
+    });
+    const r = await gw.enviar({
+      para: contato,
+      conteudo: {
+        tipo: "botoes",
+        texto: "O de sempre? X-bacon sem cebola + batata média. Total R$ 52,00.",
+        botoes: [botao("confirmar", "Confirmar"), botao("mudar", "Mudar")],
+      },
+    });
+    expect(r.ok).toBe(true);
+  });
+});

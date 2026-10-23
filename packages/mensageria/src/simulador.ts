@@ -5,6 +5,7 @@ import {
   type MensagemRecebida,
   type ResultadoEnvio,
 } from "./tipos.js";
+import { validarMensagem } from "./validacao.js";
 
 export interface EnvioRegistrado extends MensagemEnviada {
   id: string;
@@ -28,6 +29,10 @@ export class GatewaySimulador implements GatewayMensagens {
   }
 
   async enviar(mensagem: MensagemEnviada): Promise<ResultadoEnvio> {
+    const problemas = validarMensagem(mensagem);
+    if (problemas.length > 0) {
+      return { ok: false, erro: "mensagem_invalida", detalhe: problemas.join("; ") };
+    }
     if (mensagem.conteudo.tipo !== "modelo" && !this.janelaAberta(mensagem.para)) {
       return { ok: false, erro: "fora_da_janela_24h" };
     }
