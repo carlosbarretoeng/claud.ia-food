@@ -206,20 +206,20 @@ O gerente conversa com o sistema pelo WhatsApp (texto, áudio ou foto) para lan�
 
 O PIX com confirmação automática entra no MVP; cartão online e NFC-e vêm por provedores externos via API, sem o sistema guardar dados de cartão.
 
-| ID     | Requisito                                                                                          | Prioridade                     | Critério de aceite                                                               |
-| ------ | -------------------------------------------------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------- |
-| FIN-01 | Gerar cobrança PIX dinâmica (copia e cola + QR) por pedido, via API de um provedor de pagamento    | MVP                            | Código enviado na conversa logo após a confirmação                               |
-| FIN-02 | Confirmar pagamento PIX automaticamente (webhook) e liberar o pedido para a cozinha                | MVP                            | Pedido muda para "pago" em até 10 s após o pagamento; cliente recebe confirmação |
-| FIN-03 | Expiração do PIX (ex.: 15 min) com lembrete e cancelamento do pedido não pago                      | MVP                            | Prazo configurável                                                               |
-| FIN-04 | Pagamento na entrega/retirada: dinheiro (com troco informado), cartão na maquininha                | MVP                            | Troco e forma de pagamento aparecem na comanda e na mensagem do entregador       |
-| FIN-05 | Link de pagamento por cartão de crédito/débito do provedor                                         | v2                             | Nenhum dado de cartão trafega ou é armazenado no sistema                         |
-| FIN-06 | Estorno total ou parcial de PIX/cartão em cancelamento, com aprovação do gerente                   | v2                             | Estorno registrado no pedido e no caixa                                          |
-| FIN-07 | Emissão de NFC-e por pedido, via API de emissor fiscal (certificado A1 e CSC da loja configurados) | v2 (verificar obrigatoriedade) | Cupom autorizado pela SEFAZ e link/arquivo enviado ao cliente no WhatsApp        |
-| FIN-08 | Cancelamento de NFC-e dentro do prazo legal e contingência offline                                 | v2                             | Notas em contingência transmitidas automaticamente quando a SEFAZ volta          |
-| FIN-09 | Envio automático mensal dos XMLs ao contador                                                       | v2                             | E-mail ou pasta compartilhada com os arquivos do mês                             |
-| FIN-10 | Integração com maquininha (POS/TEF) para eliminar digitação de valor                               | v3                             | Valor enviado do painel para a maquininha                                        |
+| ID     | Requisito                                                                                          | Prioridade                   | Critério de aceite                                                               |
+| ------ | -------------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
+| FIN-01 | Gerar cobrança PIX dinâmica (copia e cola + QR) por pedido, via API de um provedor de pagamento    | MVP                          | Código enviado na conversa logo após a confirmação                               |
+| FIN-02 | Confirmar pagamento PIX automaticamente (webhook) e liberar o pedido para a cozinha                | MVP                          | Pedido muda para "pago" em até 10 s após o pagamento; cliente recebe confirmação |
+| FIN-03 | Expiração do PIX (ex.: 15 min) com lembrete e cancelamento do pedido não pago                      | MVP                          | Prazo configurável                                                               |
+| FIN-04 | Pagamento na entrega/retirada: dinheiro (com troco informado), cartão na maquininha                | MVP                          | Troco e forma de pagamento aparecem na comanda e na mensagem do entregador       |
+| FIN-05 | Link de pagamento por cartão de crédito/débito do provedor                                         | v2                           | Nenhum dado de cartão trafega ou é armazenado no sistema                         |
+| FIN-06 | Estorno total ou parcial de PIX/cartão em cancelamento, com aprovação do gerente                   | v2                           | Estorno registrado no pedido e no caixa                                          |
+| FIN-07 | Emissão de NFC-e por pedido, via API de emissor fiscal (certificado A1 e CSC da loja configurados) | v3 (só se deixar de ser MEI) | Cupom autorizado pela SEFAZ e link/arquivo enviado ao cliente no WhatsApp        |
+| FIN-08 | Cancelamento de NFC-e dentro do prazo legal e contingência offline                                 | v3 (só se deixar de ser MEI) | Notas em contingência transmitidas automaticamente quando a SEFAZ volta          |
+| FIN-09 | Envio automático mensal dos XMLs ao contador                                                       | v3 (só se deixar de ser MEI) | E-mail ou pasta compartilhada com os arquivos do mês                             |
+| FIN-10 | Integração com maquininha (POS/TEF) para eliminar digitação de valor                               | v3                           | Valor enviado do painel para a maquininha                                        |
 
-A obrigatoriedade de NFC-e depende do regime tributário (MEI, Simples Nacional) e do estado; validar com o contador antes de definir se FIN-07 sobe para o MVP.
+**Decisão (23/10/2026):** a loja opera como **MEI, sem obrigação de NFC-e**. FIN-07 a FIN-09 vão para a v3 e só voltam se o regime mudar (por exemplo, ao ultrapassar o teto de faturamento do MEI).
 
 ## 8. Módulo 6 — Relatórios e painel
 
@@ -273,7 +273,7 @@ Sete integrações sustentam o sistema; a do WhatsApp define a maior parte das r
 | Modelo de IA (LLM) com chamada de ferramentas  | Entender pedidos, conversar, ler notas fiscais por foto, responder ao gerente | Provedor comercial com API e política de não treinar com os dados   | MVP                                   |
 | Transcrição de áudio (speech-to-text)          | Áudios de clientes e do gerente                                               | API de transcrição em português                                     | MVP                                   |
 | Provedor de pagamento (PIX e cartão)           | Cobrança PIX dinâmica, link de cartão, webhooks, estornos                     | Intermediador com API PIX e webhook (ex.: Mercado Pago, Asaas, Efí) | MVP (PIX) / v2 (cartão)               |
-| Emissor fiscal (NFC-e)                         | Emissão, cancelamento, contingência, XML                                      | API de emissão de NFC-e                                             | v2                                    |
+| Emissor fiscal (NFC-e)                         | Emissão, cancelamento, contingência, XML                                      | API de emissão de NFC-e                                             | v3 (só se deixar de ser MEI)          |
 | Impressora térmica                             | Comandas da cozinha e via do entregador                                       | ESC/POS via agente local ou impressão pelo navegador                | MVP                                   |
 | Mapas / geocodificação                         | Distância para taxa de entrega e link de rota                                 | API de mapas                                                        | MVP (por bairro) / v2 (por distância) |
 
@@ -389,14 +389,14 @@ O MVP põe a IA para atender e vender pelo WhatsApp com o gerente aprovando os p
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------- |
 | 0 — Preparação | Simulador de WhatsApp (ADR-0004), provedor PIX, cardápio e fichas técnicas cadastrados, 100 conversas reais coletadas para teste, arquitetura técnica                                                                                                                                                                                                                                                     | Simulador enviando e recebendo mensagens no formato da Cloud API                                | 2–3 semanas                   |
 | 1 — MVP        | Todos os requisitos marcados MVP, desenvolvidos sobre o simulador; antes do lançamento, conta Meta Business, número oficial e verificação da empresa (F0-01): atendimento IA + humano com aprovação, fila de pedidos, impressão, PIX, entregador por WhatsApp, ficha do cliente e pedido habitual, entrada de estoque por foto/áudio, faltas e lista de compras, caixa, resumo diário, relatórios básicos | 2 semanas em produção com ≥ 80% dos pedidos fechados pela IA sem correção e zero pedido perdido | 10–14 semanas                 |
-| 2 — v2         | Mesas e comandas, KDS, sugestões direcionadas, fidelidade, cupons, campanhas e reativação, NF-e por chave, inventário guiado, previsão e envio de compras ao fornecedor com aprovação, NFC-e, cartão online, CMV e margem                                                                                                                                                                                 | Modo aprovação desligado; ticket médio e recompra medidos                                       | 10–12 semanas                 |
-| 3 — v3         | Compra automática com limites, validade por lote, estações de cozinha, maquininha integrada, DRE, leitura de imagens do cliente                                                                                                                                                                                                                                                                           | Definição após 3 meses de v2                                                                    | A definir                     |
+| 2 — v2         | Mesas e comandas, KDS, sugestões direcionadas, fidelidade, cupons, campanhas e reativação, NF-e por chave, inventário guiado, previsão e envio de compras ao fornecedor com aprovação, cartão online, CMV e margem                                                                                                                                                                                        | Modo aprovação desligado; ticket médio e recompra medidos                                       | 10–12 semanas                 |
+| 3 — v3         | Compra automática com limites, NFC-e se deixar de ser MEI, validade por lote, estações de cozinha, maquininha integrada, DRE, leitura de imagens do cliente                                                                                                                                                                                                                                               | Definição após 3 meses de v2                                                                    | A definir                     |
 
 As estimativas são uma ordem de grandeza para planejamento, assumindo um desenvolvedor experiente e uso de serviços prontos (WhatsApp, IA, PIX, NFC-e) via API; revisar após a fase 0.
 
 ## 14. Decisões e questões em aberto
 
-Oito das dez questões foram decididas em 22/10/2026; restam o regime tributário e a stack.
+Todas as questões foram decididas (22 e 23/10/2026).
 
 | Questão                          | Decisão                                                                                                                                 | Efeito no documento                                                                                              |
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -408,11 +408,11 @@ Oito das dez questões foram decididas em 22/10/2026; restam o regime tributári
 | Fidelidade                       | Pontos                                                                                                                                  | CLI-07 com pontos por real gasto                                                                                 |
 | Aprovação dos pedidos da IA      | Atendente aprova até a IA acertar ≥ 95% por 2 semanas                                                                                   | ATD-13 atualizado                                                                                                |
 | Cobrança de mensagens de serviço | Confirmado na [Meta](https://developers.facebook.com/docs/whatsapp/pricing): cobradas desde 01/10/2026 após 1.000 grátis/mês por número | Custo estimado de \~R$ 70/mês em mensagens com o fluxo enxuto (RNF-18); RNF-13 revisto para ≤ R$ 1,00 por pedido |
+| Regime tributário                | MEI, sem obrigação de NFC-e                                                                                                             | FIN-07 a FIN-09 para a v3 (voltam só se deixar de ser MEI)                                                       |
 
 **Ainda em aberto**
 
-- [ ] Regime tributário (loja ainda não aberta): define se NFC-e (FIN-07) entra no MVP — validar com o contador; por ora fica na v2.
-- [ ] Stack tecnológica e hospedagem: sem preferência; será proposta no documento de arquitetura técnica.
+- [x] Stack tecnológica e hospedagem: definidas no [ADR-0005](decisoes/0005-stack-typescript-supabase.md).
 
 ## Fontes
 
