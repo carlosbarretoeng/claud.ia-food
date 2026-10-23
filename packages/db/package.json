@@ -8,11 +8,14 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "gerar-migracao": "drizzle-kit generate"
+    "gerar-migracao": "drizzle-kit generate",
+    "migrar": "drizzle-kit migrate",
+    "semear": "tsx scripts/semear.ts"
   },
   "dependencies": {
     "@claudia-food/dominio": "workspace:*",
-    "drizzle-orm": "^0.45.4"
+    "drizzle-orm": "^0.45.4",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
     "drizzle-kit": "^0.31.11"

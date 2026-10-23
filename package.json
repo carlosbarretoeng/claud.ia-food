@@ -14,7 +14,10 @@
     "dev:api": "pnpm --filter @claudia-food/api dev",
     "dev:painel": "pnpm --filter @claudia-food/painel dev",
     "dev:simulador": "pnpm --filter @claudia-food/simulador dev",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:gerar": "pnpm --filter @claudia-food/db gerar-migracao",
+    "db:migrar": "pnpm --filter @claudia-food/db migrar",
+    "db:semear": "pnpm --filter @claudia-food/db semear"
   },
   "packageManager": "pnpm@12.15.0",
   "devDependencies": {

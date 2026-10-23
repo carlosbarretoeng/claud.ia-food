@@ -35,6 +35,8 @@ docker compose up                                # instala dependências e sobe 
 | Simulador de WhatsApp | http://localhost:5174                |
 | Postgres              | localhost:5432 (sem senha, só local) |
 
+Banco: `docker compose run --rm ferramentas pnpm db:migrar` (aplica as migrações) · `... pnpm db:semear` (cardápio e bairros fictícios) · `... pnpm db:gerar` (nova migração após mudar `packages/db/src/esquema.ts`).
+
 Comandos úteis: `docker compose run --rm ferramentas pnpm test` · `... pnpm lint` · `... pnpm typecheck` · `... pnpm build` · `docker compose down` (para tudo).
 
 Estrutura: `apps/` (api, painel, simulador, agente-impressao) e `packages/` (dominio, mensageria, ia, db) — ver [arquitetura técnica](docs/arquitetura-tecnica.md#3-estrutura-do-repositório).
